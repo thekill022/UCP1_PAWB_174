@@ -125,6 +125,17 @@ app.get('/bibit/edit/:id', isAuthenticated, (req, res) => {
     })
 })
 
+
+// edit method bibit
+app.post('/bibit/update', isAuthenticated, (req, res) => {
+    const { id, nama_bibit, jumlah } = req.body
+    const sql = 'update bibit set nama_bibit = ?, jumlah_bks = ? where id = ?'
+    db.query(sql, [nama_bibit, jumlah, id], (err, result) => {
+
+        res.redirect('/dashboard')
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
