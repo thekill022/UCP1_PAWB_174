@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../partials/boostrap.ejs') %>
+</head>
+<body class="container p-3">
+<div class="d-flex justify-content-between w-100">
+    <h1 class="text-primary">Dashboard</h1>
+    <form action="/logout" method="post">
+        <button type="submit" class="btn btn-danger my-3">Logout</button>
+    </form>
+</div>
+<a href="/add" class="btn btn-primary text-white mb-3">Tambah Data</a>
+<div>
+    <h2 class="bg-primary text-white p-3 d-inline-block rounded">Bibit</h2>
+    <h2 class="bg-white  p-3 d-inline-block rounded"><a href="/pupuk" class="text-decoration-none text-primary">Pupuk</a></h2>
+</div>
+<% resultBibit.forEach(bbt => { %>
+    <div class="card my-2">
+        <div class="card-header">
+          Featured
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Nama : &nbsp;&nbsp;<%= bbt.nama_bibit%></h5>
+          <p class="card-text">Jumlah(bungkus) :&nbsp;<%= bbt.jumlah_bks %></p>
+          <a href="/bibit/edit/<%= bbt.id%>" class="btn btn-warning text-white" >Edit</a>
+          <a href="#" class="btn btn-danger text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</a>
+        </div>
+      </div>
+    
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Apakah Anda Yakin Ingin Menghapus Data?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="/bibit/delete/<%= bbt.id %>" type="button" class="btn btn-primary">Yakin</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <% }) %>
+
+
+</body>
+</html>

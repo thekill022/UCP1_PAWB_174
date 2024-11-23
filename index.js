@@ -52,6 +52,18 @@ app.post('/login', (req, res) => {
     }
 })
 
+app.get('/dashboard', isAuthenticated, (req, res) => {
+
+    const sql = 'select * from bibit'
+    db.query(sql, (err, resultBibit) => {
+
+        if(err) throw err  
+            
+        if(err) throw err
+            res.render('dashboard', {resultBibit})
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
