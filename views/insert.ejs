@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Data</title>
+    <%- include('../partials/boostrap.ejs') %>
+</head>
+<body class="container">
+    <h1 class="text-primary">Input Data</h1>
+    <form action="/insert" method="post" class="my-2">
+        <select name="tabel" id="tabel" onchange="toggleInputs()" required>
+            <option value="option">-</option>
+            <option value="bibit">Bibit</option>
+            <option value="pupuk">Pupuk</option>
+        </select>
+
+        <div id="bibit-inputs" class="my-2">
+            <input type="text" name="nama_bibit" placeholder="Nama Bibit">
+            <input type="number" name="jumlah" placeholder="Jumlah">
+        </div>
+
+        <div id="pupuk-inputs" style="display: none;" class="my-2">
+            <input type="text" name="jenis" placeholder="Jenis Pupuk">
+            <input type="text" name="merk" placeholder="merk">
+            <input type="number" name="jumlah" placeholder="jumlah">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <script>
+        function toggleInputs() {
+            const tableSelect = document.getElementById('tabel').value;
+            document.getElementById('bibit-inputs').style.display = tableSelect === 'bibit' ? 'block' : 'none';
+            document.getElementById('pupuk-inputs').style.display = tableSelect === 'pupuk' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

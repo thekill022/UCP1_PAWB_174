@@ -72,6 +72,50 @@ app.get('/pupuk', isAuthenticated, (req, res) => {
     })
 })
 
+//logout method
+app.post('/logout', (req, res) => {
+    if(req.session.user) {
+        req.session.destroy((err) => {
+            if(err) {
+                res.status(500).redirect('/dashboard')
+            } else {
+                res.redirect('/')
+            }
+        })
+    } else {
+        res.redirect('/dashboard')
+    }
+})
+
+//add page
+app.get('/add', isAuthenticated, (req, res) => {
+    res.render('insert')
+})
+
+//add method
+app.post('/insert', (req, res) => {
+    const {tabel} = req.body
+    console.log(tabel)
+    if(tabel == 'bibit') {
+        const {nama_bibit, jumlah} = req.body
+        console.log(req.body)
+        const sql = 'insert into bibit(nama_bibit, jumlah_bks) values (?, ?)'
+        db.query(sql, [nama_bibit, jumlah[0]], (err, result) => {
+            console.log(result)
+            res.redirect('/dashboard')
+        })
+    } else if(tabel == 'pupuk') {
+        const {jenis, merk, jumlah} = req.body
+        console.log(req.body.jumlah)
+        const sql = 'insert into pupuk(jenis, merk, jumlah) values (?, ?, ?)'
+        db.query(sql, [jenis, merk, jumlah[1]], (err, result) => {
+            res.redirect('/dashboard')
+        })
+    } else {
+        res.status(404).redirect('/dashboard')
+    }
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
