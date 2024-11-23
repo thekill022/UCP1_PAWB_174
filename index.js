@@ -64,6 +64,14 @@ app.get('/dashboard', isAuthenticated, (req, res) => {
     })
 })
 
+// pupuk page
+app.get('/pupuk', isAuthenticated, (req, res) => {
+    const sql = 'select * from pupuk'
+    db.query(sql, (err, resultPupuk) => {
+    res.render('pupuk', {resultPupuk})
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
