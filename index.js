@@ -156,6 +156,16 @@ app.post('/pupuk/update', isAuthenticated, (req, res) => {
     })
 })
 
+// delete method bibit
+app.get('/bibit/delete/:id', (req, res) => {
+    const id = req.params.id
+    const sql = 'delete from bibit where id = ?'
+    db.query(sql, id, (err, result) => {
+        if(err) throw err
+        res.redirect('/dashboard')
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
