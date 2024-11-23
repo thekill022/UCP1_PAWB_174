@@ -116,6 +116,15 @@ app.post('/insert', (req, res) => {
     }
 })
 
+// edit page bibit
+app.get('/bibit/edit/:id', isAuthenticated, (req, res) => {
+    const id = req.params.id
+    const sql = 'select * from bibit where id = ?'
+    db.query(sql, id, (err, result) => {
+        res.render('edit/edit-bibit', {result})
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
