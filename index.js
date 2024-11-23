@@ -146,6 +146,16 @@ app.get('/pupuk/edit/:id', isAuthenticated, (req, res) => {
     })
 })
 
+// edit method pupuk
+app.post('/pupuk/update', isAuthenticated, (req, res) => {
+    const {id, jenis, merk, jumlah} = req.body
+    const sql = 'update pupuk set jenis = ?, merk = ?, jumlah = ? where id = ?'
+    db.query(sql, [jenis, merk, jumlah, id] , (err, result) => {
+        console.log(result)
+        res.redirect('/dashboard')
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
