@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../../partials/boostrap.ejs') %>
+</head>
+<body>
+    <h1>Edit Data</h1>
+    <form action="/pupuk/update" method="post">
+        <input type="hidden" name="id" required value="<%= result[0].id %>">
+        <input type="text" name="jenis" required value="<%= result[0].jenis %>">
+        <input type="teks" name="merk" required min="1" value="<%= result[0].merk %>">
+        <input type="number" name="jumlah" required min="1" value="<%= result[0].jumlah %>">
+        <button type="submit" class="btn btn-warning text-white">Update</button>
+    </form>
+</body>
+</html>
