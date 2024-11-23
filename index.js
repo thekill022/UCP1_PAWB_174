@@ -166,6 +166,16 @@ app.get('/bibit/delete/:id', (req, res) => {
     })
 })
 
+// delete method pupuk
+app.get('/pupuk/delete/:id', (req, res) => {
+    const id = req.params.id
+    const sql = 'delete from pupuk where id = ?'
+    db.query(sql, id, (err, result) => {
+        if(err) throw err
+        res.redirect('/dashboard')
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
