@@ -136,6 +136,16 @@ app.post('/bibit/update', isAuthenticated, (req, res) => {
     })
 })
 
+// edit page pupuk
+app.get('/pupuk/edit/:id', isAuthenticated, (req, res) => {
+    const id = req.params.id
+    const sql = 'select * from pupuk where id = ?'
+    db.query(sql, id, (err, result) => {
+        console.log(result)
+        res.render('edit/edit-pupuk', {result})
+    })
+})
+
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
 })
