@@ -2,6 +2,8 @@ const express = require('express')
 const session = require('express-session')
 const app = express()
 const bodyParser = require('body-parser')
+const db = require('./connectDB')
+const petani = require('./db')
 
 
 require('dotenv').config()
@@ -35,6 +37,20 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
+app.post('/login', (req, res) => {
+    const {email, password} = req.body
+
+    if(email == petani[0].email && password == petani[0].password) {
+        req.session.user = {
+            id : petani[0].id,
+            email : petani[0].email,
+        }
+        res.redirect('/dashboard')
+    }
+    else{
+        res.redirect('/')
+    }
+})
 
 app.listen(port, () => {
     console.log(`app listen on link : http://localhost:${port}`)
